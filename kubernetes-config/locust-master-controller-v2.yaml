@@ -1,0 +1,27 @@
+apiVersion: "v1"
+kind: "Pod"
+metadata:
+  name: locust-master
+  labels:
+    name: locust-master
+spec:
+  containers:
+    - name: locust-master
+      image: gcr.io/[PROJECT_ID]/locust-tasks:latest
+      env:
+        - name: LOCUST_MODE
+          value: master
+        - name: TARGET_HOST
+          value: http://[TARGET_HOST]
+        - name: TEST_NAME
+          value: [TEST_NAME]
+      ports:
+        - name: loc-master-web
+          containerPort: 8089
+          protocol: TCP
+        - name: loc-master-p1
+          containerPort: 5557
+          protocol: TCP
+        - name: loc-master-p2
+          containerPort: 5558
+          protocol: TCP
